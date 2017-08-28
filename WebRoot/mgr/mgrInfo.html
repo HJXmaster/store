@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商品管理</title>
+<link rel="stylesheet"
+	href="plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/goods.css">
+<link type="text/css" rel="stylesheet" href="css/user_info.css">
+</head>
+<body>
+	<div id="header-2017"
+		style="position:fixed;border-bottom:1px solid gray;z-index:100;">
+		<div style=" width:85%; margin:0 auto;">
+			<div class="header-lf">
+				<a href="index.html"><img src="img/logo.png"></a>
+			</div>
+			<div class="header-md" style="margin-left:30px;">
+				<div style="height:100%;padding-left:10px;display:inline-block;">
+					<h2>电子商务</h2>
+				</div>
+				<div style="height:100%;padding-left:30px;display:inline-block;">
+					<h4>个人中心</h4>
+				</div>
+			</div>
+			<div class="header-md" style="float: right">
+				<ul id="login_span">
+					<li><a href="login.html">登录</a></li>
+					<li><a href="##" style="margin-left: 0px;pading-left:0px;">
+							注册</a></li>
+				</ul>
+				<ul id="user_span" style="display:none;">
+					<li><a id="user_name">玛丽亚</a></li>
+					<li><a href="logout.do"
+						style="margin-left: 0px;pading-left:0px;" id="logout_bt"> 退出</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="warp">
+		<div class="warp_form">
+			<div class="back_img">
+				<img src="img/photo.jpg">
+			</div>
+			<div class="iframe">
+				<div class="float_img">
+					<img class="image_photo" src="img/photo.jpg">
+				</div>
+				<div class="center_text" id="admin_bigname">唐僧</div>
+
+				<div class="table_info">
+					<table style="">
+						<tbody>
+							<tr>
+								<td class="table_title_cs" >管理员ID号</td>
+								<td id="admin_id">01</td>
+							</tr>
+							<tr>
+								<td class="table_title_cs">昵称</td>
+								<td><span id="admin_aname"> 张三</span></td>
+							</tr>
+							
+							<tr>
+								<td class="table_title_cs" >权限等级</td>
+								<td id="admin_type">普通管理员</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="iframe" style="padding-left: 5%">
+				<img class="image_icon" src="img/photo.jpg">&nbsp;&nbsp;&nbsp;&nbsp;最新动态
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<div id="footer-2017">
+		<div class="footer-box">
+			<h5>地址：广东省广州市天河区华南农业大学华山区18栋3楼</h5>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<script src="plugins/jquery-3.3.1/jquery-3.1.1.min.js"></script>
+	<script src="plugins/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/adminInfo.js"></script>
+</body>
+</html>

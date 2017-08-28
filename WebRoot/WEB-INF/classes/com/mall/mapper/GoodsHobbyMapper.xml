@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.GoodsHobbyMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.GoodsHobby" >
+    <result column="cur_cid" property="curCid" jdbcType="INTEGER" />
+    <result column="intro_cid" property="introCid" jdbcType="INTEGER" />
+    <result column="rank" property="rank" jdbcType="DOUBLE" />
+    <association property="commodity" column="intro_cid" select="com.mall.dao.CommodityMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cur_cid,intro_cid,rank
+  </sql>
+  <select id="selectByCid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods_hobby
+    where cur_cid = #{cid,jdbcType=INTEGER}
+    order by rank desc
+    limit 0,5
+  </select>
+  <resultMap id="ResultMap" type="com.mall.entity.GoodsHobby" >
+    <result column="cid" property="introCid" jdbcType="INTEGER" />
+    <result column="c" property="sales" jdbcType="INTEGER" />
+    <association property="commodity" column="cid" select="com.mall.dao.CommodityMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <select id="selectSaleTopFive" resultMap="ResultMap" >
+	select cid,sum(csize) as c
+	from orderinfo
+	group by cid
+	order by c DESC
+	limit 0,5
+  </select>
+</mapper>

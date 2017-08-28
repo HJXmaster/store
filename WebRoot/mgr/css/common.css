@@ -1,0 +1,104 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none !important;
+	font-family: "Microsoft Yahei";
+}
+body{
+	width: 100%;
+	
+}
+.clear{clear:both; height: 0; line-height: 0; font-size: 0}
+
+/*头部*/
+#header-2017{
+	width: 100%;
+	height: 80px;
+	// position:fixed;
+	background: #fff;
+
+}
+
+@media screen and (max-width: 1140px) {
+	#header-2017{
+		width: 1140px;
+	}
+}
+/*头部标志*/
+.header-lf{
+	float: left;
+	padding-top: 7px;
+}
+
+.header-lf a{
+	float: left;
+}
+
+.header-lf a h2{
+	margin-left: 14px;
+	margin-top: 15px;
+	color: #525252;
+}
+
+.header-lf img{
+	width: 60px;
+	margin-top: 6px;
+}
+
+/*头部导航*/
+.header-md{
+	float: left;
+	margin-left: 60px;
+}
+
+.header-md ul li{
+	float: left;
+	margin-left: 5px;
+	padding: 5px 5px;
+	margin-top: 25px;
+}
+
+.header-md ul li a{
+	font-size: 16px;
+	margin-left: 22px;
+	color: #606B70;
+	display: inline-block;
+
+}
+
+.header-md ul li a:hover{
+	color: #377AB7 !important;
+}
+
+
+
+
+
+/*底部版权*/
+#footer-2017{
+	width: 100%;
+	height:100px;
+	background: rgb(54,58,67);
+	margin-top: 0px;
+}
+
+@media screen and (max-width: 1140px) {
+	#footer-2017{
+		width: 1140px;
+	}
+}
+
+.footer-box{
+	width: 1140px;
+	height: 100px;
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 30px;
+}
+
+.footer-box h5{
+	color: rgb(175,175,175);
+	font-size: 16px;
+	font-weight: normal;
+}

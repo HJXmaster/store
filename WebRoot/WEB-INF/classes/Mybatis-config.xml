@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 日志必须放在最上面,设置日志实现类为log4j -->
+<!-- 然后在项目的src文件夹下新建log4j.properties文件 -->
+	<properties resource="jdbc.properties"></properties>
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>
+	</settings>
+	
+	<mappers>
+		<mapper resource="com/mall/mapper/AdminMapper.xml" />
+		<mapper resource="com/mall/mapper/BtypeMapper.xml" />
+		<mapper resource="com/mall/mapper/CommodityMapper.xml" />
+		<mapper resource="com/mall/mapper/OrderInfoMapper.xml" />
+		<mapper resource="com/mall/mapper/OrdersMapper.xml" />
+		<mapper resource="com/mall/mapper/PreOrderMapper.xml" />
+		<mapper resource="com/mall/mapper/ReviewMapper.xml" />
+		<mapper resource="com/mall/mapper/StypeMapper.xml" />
+		<mapper resource="com/mall/mapper/UserMapper.xml" />
+		<mapper resource="com/mall/mapper/UserHobbyMapper.xml" />
+		<mapper resource="com/mall/mapper/GoodsHobbyMapper.xml" />
+		<mapper resource="com/mall/mapper/GoodsPicsMapper.xml" />
+	</mappers>
+</configuration>

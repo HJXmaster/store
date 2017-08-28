@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.Orders" >
+    <id column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="oaddress" property="oaddress" jdbcType="VARCHAR" />
+    <result column="oTotalPrice" property="ototalprice" jdbcType="DOUBLE" />
+    <result column="ostime" property="ostime" jdbcType="TIMESTAMP" />
+    <result column="oetime" property="oetime" jdbcType="TIMESTAMP" />
+    <result column="ostate" property="ostate" jdbcType="VARCHAR" />
+    <result column="ophone" property="ophone" jdbcType="VARCHAR" />
+    <result column="oname" property="oname" jdbcType="VARCHAR" />
+    <result column="opostcode" property="opostcode" jdbcType="VARCHAR" />
+    <association property="user" column="uid" select="com.mall.dao.UserMapper.selectByPrimaryKey"></association>
+    <collection property="infos" column="oid" select="com.mall.dao.OrderInfoMapper.selectByOid"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    oid, uid, oaddress, oTotalPrice, ostime, oetime, ostate, ophone, oname, opostcode
+  </sql>
+  <select id="getOrdersByTime" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where ostime &gt;=#{startTime} and ostime &lt;=#{endTime}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orders 
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where oid = #{oid,jdbcType=INTEGER}
+  </select>
+  <select id="getOrdersByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where uid=#{uid}
+    order by ostime desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where oid = #{oid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mall.entity.Orders" >
+    insert into orders (oid, uid, oaddress, 
+      oTotalPrice, ostime, oetime, 
+      ostate,ophone,oname,opostcode)
+    values (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{oaddress,jdbcType=VARCHAR}, 
+      #{ototalprice,jdbcType=DOUBLE}, #{ostime,jdbcType=TIMESTAMP}, #{oetime,jdbcType=TIMESTAMP}, 
+      #{ostate,jdbcType=VARCHAR}, #{ophone,jdbcType=VARCHAR},#{oname,jdbcType=VARCHAR},
+      #{opostcode,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- 自动生成主键并获取 -->
+  <insert id="insertAuto" parameterType="com.mall.entity.Orders" useGeneratedKeys="true" keyProperty="oid">
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="oaddress != null" >
+        oaddress,
+      </if>
+      <if test="ototalprice != null" >
+        oTotalPrice,
+      </if>
+      <if test="ostime != null" >
+        ostime,
+      </if>
+      <if test="oetime != null" >
+        oetime,
+      </if>
+      <if test="ostate != null" >
+        ostate,
+      </if>
+      <if test="ophone != null" >
+        ophone,
+      </if>
+      <if test="oname != null" >
+        oname,
+      </if>
+      <if test="opostcode != null" >
+        opostcode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="oaddress != null" >
+        #{oaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ototalprice != null" >
+        #{ototalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ostime != null" >
+        #{ostime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oetime != null" >
+        #{oetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ostate != null" >
+        #{ostate,jdbcType=VARCHAR},
+      </if>
+      <if test="ophone != null" >
+        #{ophone,jdbcType=VARCHAR},
+      </if>
+      <if test="oname != null" >
+        #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="opostcode != null" >
+        #{opostcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.mall.entity.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="oaddress != null" >
+        oaddress,
+      </if>
+      <if test="ototalprice != null" >
+        oTotalPrice,
+      </if>
+      <if test="ostime != null" >
+        ostime,
+      </if>
+      <if test="oetime != null" >
+        oetime,
+      </if>
+      <if test="ostate != null" >
+        ostate,
+      </if>
+      <if test="ophone != null" >
+        ophone,
+      </if>
+      <if test="oname != null" >
+        oname,
+      </if>
+      <if test="opostcode != null" >
+        opostcode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="oaddress != null" >
+        #{oaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ototalprice != null" >
+        #{ototalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ostime != null" >
+        #{ostime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oetime != null" >
+        #{oetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ostate != null" >
+        #{ostate,jdbcType=VARCHAR},
+      </if>
+      <if test="ophone != null" >
+        #{ophone,jdbcType=VARCHAR},
+      </if>
+      <if test="oname != null" >
+        #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="opostcode != null" >
+        #{opostcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.entity.Orders" >
+    update orders
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="oaddress != null" >
+        oaddress = #{oaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ototalprice != null" >
+        oTotalPrice = #{ototalprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ostime != null" >
+        ostime = #{ostime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oetime != null" >
+        oetime = #{oetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ostate != null" >
+        ostate = #{ostate,jdbcType=VARCHAR},
+      </if>
+      <if test="ophone != null" >
+        ophone = #{ophone,jdbcType=VARCHAR},
+      </if>
+      <if test="oname != null" >
+        oname = #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="opostcode != null" >
+        opostcode = #{opostcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.Orders" >
+    update orders
+    set uid = #{uid,jdbcType=INTEGER},
+      oaddress = #{oaddress,jdbcType=VARCHAR},
+      oTotalPrice = #{ototalprice,jdbcType=DOUBLE},
+      ostime = #{ostime,jdbcType=TIMESTAMP},
+      oetime = #{oetime,jdbcType=TIMESTAMP},
+      ostate = #{ostate,jdbcType=VARCHAR},
+      ophone = #{ophone,jdbcType=VARCHAR},
+      oname = #{oname,jdbcType=VARCHAR},
+      opostcode = #{opostcode,jdbcType=VARCHAR}
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.GoodsPicsMapper" >
+  <select id="selectMiniPic" parameterType="java.lang.Integer" resultType="string">
+    select minipic
+    from goods_pics
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <select id="selectPics" parameterType="java.lang.Integer" resultType="com.mall.entity.Pics">
+    select pic1,pic2,pic3
+    from goods_pics
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+</mapper>

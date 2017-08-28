@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.ReviewMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.Review" >
+    <id column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="rtime" property="rtime" jdbcType="TIMESTAMP" />
+    <result column="rtext" property="rtext" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rid, oid, cid, rtime, rtext, grade
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from review
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAvgGrade" resultType="double" parameterType="java.lang.Integer" >
+    select avg(grade)
+    from review
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <select id="getReviewsByCid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from review
+    where cid = #{cid,jdbcType=INTEGER}
+    order by rtime desc
+  </select>
+  <select id="isPublished" resultType="integer">
+    select count(*)
+    from review
+    where cid = #{cid,jdbcType=INTEGER}
+    	and oid=#{oid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from review
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mall.entity.Review" >
+    insert into review (rid, oid, cid, 
+      rtime, rtext,grade)
+    values (#{rid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      #{rtime,jdbcType=TIMESTAMP}, #{rtext,jdbcType=VARCHAR},#{grade,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.entity.Review" >
+    insert into review
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="rtime != null" >
+        rtime,
+      </if>
+      <if test="rtext != null" >
+        rtext,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="rtime != null" >
+        #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtext != null" >
+        #{rtext,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.entity.Review" >
+    update review
+    <set >
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="rtime != null" >
+        rtime = #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtext != null" >
+        rtext = #{rtext,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.Review" >
+    update review
+    set oid = #{oid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      rtime = #{rtime,jdbcType=TIMESTAMP},
+      rtext = #{rtext,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

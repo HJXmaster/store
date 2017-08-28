@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>管理员首页</title>
+<link rel="stylesheet"
+	href="plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/index.css">
+<style type="text/css">
+.header-md ul li{
+	float: left;	
+	padding: 5px 2px;
+	margin-top: 25px;
+}</style>
+</head>
+<body>
+	<div id="header-2017"
+		style="position:fixed;border-bottom:1px solid gray">
+		<div style=" width:1120px; margin:0 auto;">
+			<div class="header-lf">
+				<a href="#"><img src="img/logo.png"></a>
+			</div>
+			
+			<div class="header-md" style="margin-left:20px;">
+								
+				<ul>
+				    <li style="margin-top:0px"><h2 >电子商务</h2></li>
+					<li><a href="manager.html"> 管理员管理</a></li>
+					<li><a href="user.html"> 会员管理</a></li>
+					<li><a href="goods.html"> 商品管理</a></li>
+					<li><a href="review.html"> 评论管理</a></li>
+					<li><a href="order.html"> 订单管理</a></li>
+					<li><a href="pie.html"> 销售统计</a></li>
+					<li><a href="btype.html"> 大小类别管理</a></li>
+
+				</ul>
+			</div>
+			<div class="header-md" style="float: right">
+
+				<ul id="login_span">
+					<li><a href="login.html"> 登录</a></li>
+					<!-- <li><a href="##" style="margin-left: 0px;pading-left:0px;">
+							注册</a></li> -->
+				</ul>
+				<ul id="user_span" style="display:none;">
+					<li><a href="mgrInfo.html" id="user_name">玛丽亚</a></li>
+					<li><a href="logout.do"
+						style="margin-left: 0px;pading-left:0px;" id="logout_bt"> 退出</a></li>
+				</ul>
+
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div class="big-2017" style="padding-top:80px;height:88vh;">
+		<div class="btn-appstore" style="margin-top:35vh;margin-left:38vw;">
+			<a href="#"> <img src="img/iphone.png" />				
+			<span style="font-size:16px;padding-left:10px;">电子商务后台管理平台</span></a>
+		</div>
+		
+	</div>
+
+	<div id="footer-2017">
+		<div class="footer-box">
+			<h5>地址：广东省广州市天河区华南农业大学华山区18栋3楼</h5>
+		</div>
+		
+	</div>
+
+	<script src="plugins/jquery-3.3.1/jquery-3.1.1.min.js"></script>
+	<script src="plugins/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+	<script src="js/index.js"></script>
+	<script type="text/javascript">
+	 function no_login_jmp(){
+		//window.location.href="login.html";
+	 }
+	</script>
+</body>
+</html>

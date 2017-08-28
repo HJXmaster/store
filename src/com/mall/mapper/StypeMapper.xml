@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.StypeMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.Stype" >
+    <id column="stid" property="stid" jdbcType="INTEGER" />
+    <result column="stname" property="stname" jdbcType="VARCHAR" />
+    <result column="btid" property="btid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stid, stname, btid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stype
+    where stid = #{stid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByBtype" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stype
+    where btid = #{btid,jdbcType=INTEGER}
+  </select>
+  
+   <select id="selectAll" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from stype
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stype
+    where stid = #{stid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mall.entity.Stype" >
+    insert into stype (stid, stname, btid
+      )
+    values (#{stid,jdbcType=INTEGER}, #{stname,jdbcType=VARCHAR}, #{btid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.entity.Stype" >
+    insert into stype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stid != null" >
+        stid,
+      </if>
+      <if test="stname != null" >
+        stname,
+      </if>
+      <if test="btid != null" >
+        btid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stid != null" >
+        #{stid,jdbcType=INTEGER},
+      </if>
+      <if test="stname != null" >
+        #{stname,jdbcType=VARCHAR},
+      </if>
+      <if test="btid != null" >
+        #{btid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.entity.Stype" >
+    update stype
+    <set >
+      <if test="stname != null" >
+        stname = #{stname,jdbcType=VARCHAR},
+      </if>
+      <if test="btid != null" >
+        btid = #{btid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where stid = #{stid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.Stype" >
+    update stype
+    set stname = #{stname,jdbcType=VARCHAR},
+      btid = #{btid,jdbcType=INTEGER}
+    where stid = #{stid,jdbcType=INTEGER}
+  </update>
+</mapper>

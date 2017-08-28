@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.CommodityMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.Commodity" >
+    <id column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="btid" property="btid" jdbcType="INTEGER" />
+    <result column="stid" property="stid" jdbcType="INTEGER" />
+    <result column="cprice" property="cprice" jdbcType="DOUBLE" />
+    <result column="cremain" property="cremain" jdbcType="INTEGER" />
+    <association column="cid" property="miniPic" select="com.mall.dao.GoodsPicsMapper.selectMiniPic" />
+    <association column="cid" property="grade" select="com.mall.dao.ReviewMapper.selectAvgGrade" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cid, cname, btid, stid, cprice, cremain
+  </sql>
+  <select id="fuzzySearch" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where cname like "%"#{condition}"%"
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where 1=1
+    <if test="btid != null">
+    	and btid=#{btid}
+	</if>
+	<if test="stid != null">
+    	and stid=#{stid}
+	</if>
+  </select>
+  <select id="search" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where 1=1
+    <if test="btid != null">
+    	and btid=#{btid}
+	</if>
+	<if test="stid != null">
+    	and stid=#{stid}
+	</if>
+	<if test="condition != null">
+    	and cname like "%"#{condition}"%"
+	</if>
+	limit #{head},#{size}
+  </select>
+  <select id="searchCount" resultType="integer">
+    select count(*)
+    from commodity
+    where 1=1
+    <if test="btid != null">
+    	and btid=#{btid}
+	</if>
+	<if test="stid != null">
+    	and stid=#{stid}
+	</if>
+	<if test="condition != null">
+    	and cname like "%"#{condition}"%"
+	</if>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodity
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mall.entity.Commodity" >
+    insert into commodity (cid, cname, btid, 
+      stid, cprice, cremain
+      )
+    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{btid,jdbcType=INTEGER}, 
+      #{stid,jdbcType=INTEGER}, #{cprice,jdbcType=DOUBLE}, #{cremain,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.entity.Commodity" >
+    insert into commodity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="btid != null" >
+        btid,
+      </if>
+      <if test="stid != null" >
+        stid,
+      </if>
+      <if test="cprice != null" >
+        cprice,
+      </if>
+      <if test="cremain != null" >
+        cremain,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="btid != null" >
+        #{btid,jdbcType=INTEGER},
+      </if>
+      <if test="stid != null" >
+        #{stid,jdbcType=INTEGER},
+      </if>
+      <if test="cprice != null" >
+        #{cprice,jdbcType=DOUBLE},
+      </if>
+      <if test="cremain != null" >
+        #{cremain,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.entity.Commodity" >
+    update commodity
+    <set >
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="btid != null" >
+        btid = #{btid,jdbcType=INTEGER},
+      </if>
+      <if test="stid != null" >
+        stid = #{stid,jdbcType=INTEGER},
+      </if>
+      <if test="cprice != null" >
+        cprice = #{cprice,jdbcType=DOUBLE},
+      </if>
+      <if test="cremain != null" >
+        cremain = #{cremain,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.Commodity" >
+    update commodity
+    set cname = #{cname,jdbcType=VARCHAR},
+      btid = #{btid,jdbcType=INTEGER},
+      stid = #{stid,jdbcType=INTEGER},
+      cprice = #{cprice,jdbcType=DOUBLE},
+      cremain = #{cremain,jdbcType=INTEGER}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>

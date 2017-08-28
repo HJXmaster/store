@@ -1,0 +1,26 @@
+.dataStatistic {
+	width: 500px;
+	height: 200px;
+	border: 1px solid #ccc;
+	margin: 0 auto;
+	margin: 10px;
+	overflow: hidden
+}
+
+#cylindrical {
+	width: 500px;
+	height: 200px;
+	margin-top: -15px
+}
+
+#line {
+	width: 500px;
+	height: 200px;
+	margin-top: -15px
+}
+
+#pie {
+	width: 500px;
+	height: 200px;
+	margin-top: -15px
+}

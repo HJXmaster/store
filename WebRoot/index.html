@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><title>TOF mall 会说话的生活超市</title><link href=./static/css/app.6e3580a047906281bf52b4d4c6a62a61.css rel=stylesheet></head><body><style>.child-view {
+      /*position: absolute;*/
+      transition: all .2s cubic-bezier(.1,0,.1,1);
+    }
+
+
+
+    /*（用户中心）新进的那个↓*/
+    .slide-user-enter{
+      opacity: 0;
+                        /*translate(【+往右滑，-往左滑】，【+上升，-下降】)*/
+      -webkit-transform: translate(20px, 0px);
+    }
+    /*离开的那个↓*/
+    .slide-user-leave-active{
+      opacity: 0;
+      -webkit-transform: translate(20px, 0px);
+    }</style><div id=app><transition name=slide-user mode=out-in><router-view class=child-view v-if=!$route.meta.keepAlive></router-view></transition><transition name=slide-user mode=out-in><keep-alive><router-view class=child-view v-if=$route.meta.keepAlive></router-view></keep-alive></transition></div><script type=text/javascript src=./static/js/manifest.4f7d3cc670441a560426.js></script><script type=text/javascript src=./static/js/vendor.85ce717c206e1e3a8da1.js></script><script type=text/javascript src=./static/js/app.6b0c8634120d9ed6e688.js></script></body></html>

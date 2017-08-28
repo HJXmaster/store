@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.UserHobbyMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.UserHobby" >
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="rank" property="rank" jdbcType="DOUBLE" />
+    <association property="commodity" column="cid" select="com.mall.dao.CommodityMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  
+  <resultMap id="ResultMap" type="com.mall.entity.UserHobby" >
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="grade" property="rank" jdbcType="DOUBLE" />
+    <association property="commodity" column="cid" select="com.mall.dao.CommodityMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid,cid,rank
+  </sql>
+  <select id="selectByUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_hobby
+    where uid = #{uid,jdbcType=INTEGER}
+    order by rank desc
+    limit 0,5
+  </select>
+  <select id="selectTopFive" resultMap="ResultMap">
+		select max(rank) as grade, cid
+		from user_hobby
+		GROUP BY cid
+		ORDER BY grade DESC
+		limit 0,5
+  </select>
+</mapper>

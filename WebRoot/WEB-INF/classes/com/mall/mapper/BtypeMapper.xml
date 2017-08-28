@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.BtypeMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.Btype" >
+    <id column="btid" property="btid" jdbcType="INTEGER" />
+    <result column="btname" property="btname" jdbcType="VARCHAR" />
+    <collection property="stypes" column="btid" select="com.mall.dao.StypeMapper.selectByBtype"></collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    btid, btname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from btype
+    where btid = #{btid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from btype
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from btype
+    where btid = #{btid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mall.entity.Btype" >
+    insert into btype (btid, btname)
+    values (#{btid,jdbcType=INTEGER}, #{btname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.entity.Btype" >
+    insert into btype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="btid != null" >
+        btid,
+      </if>
+      <if test="btname != null" >
+        btname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="btid != null" >
+        #{btid,jdbcType=INTEGER},
+      </if>
+      <if test="btname != null" >
+        #{btname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.entity.Btype" >
+    update btype
+    <set >
+      <if test="btname != null" >
+        btname = #{btname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where btid = #{btid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.Btype" >
+    update btype
+    set btname = #{btname,jdbcType=VARCHAR}
+    where btid = #{btid,jdbcType=INTEGER}
+  </update>
+</mapper>

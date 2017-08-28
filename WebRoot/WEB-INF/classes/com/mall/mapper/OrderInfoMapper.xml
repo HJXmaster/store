@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.dao.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mall.entity.OrderInfo" >
+    <id column="iid" property="iid" jdbcType="INTEGER" />
+    <result column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="csize" property="csize" jdbcType="INTEGER" />
+    <association column="cid" property="commodity" select="com.mall.dao.CommodityMapper.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    iid, oid, cid, csize
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderinfo
+    where iid = #{iid,jdbcType=INTEGER}
+  </select>
+  <select id="getOrderInfosByTimeAndCid" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orders natural join orderinfo
+    where ostime &gt;=#{startTime} and ostime &lt;=#{endTime} and cid=#{cid}
+  </select>
+  
+  <select id="selectByOid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderinfo 
+    where oid=#{oid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orderinfo
+    where iid = #{iid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mall.entity.OrderInfo" >
+    insert into orderinfo (iid, oid, cid, 
+      csize)
+    values (#{iid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      #{csize,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mall.entity.OrderInfo" >
+    insert into orderinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        iid,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="csize != null" >
+        csize,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        #{iid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="csize != null" >
+        #{csize,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mall.entity.OrderInfo" >
+    update orderinfo
+    <set >
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="csize != null" >
+        csize = #{csize,jdbcType=INTEGER},
+      </if>
+    </set>
+    where iid = #{iid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.OrderInfo" >
+    update orderinfo
+    set oid = #{oid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      csize = #{csize,jdbcType=INTEGER}
+    where iid = #{iid,jdbcType=INTEGER}
+  </update>
+</mapper>

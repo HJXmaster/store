@@ -1,0 +1,44 @@
+
+.product_img{
+	width:50%;
+	display:inline-block;
+	padding:40px 30px 40px 50px;
+}
+.product_img img{
+	width:90%;
+}
+.goods_info{
+	
+	display:inline-block;
+	padding-left:30px;
+	padding-top:40px;
+	font-size:16px;
+	vertical-align: top;
+}
+.c_title{
+	
+}
+.c_goods{
+	
+	padding:20px 0px 10px 20px;
+}
+.c_goods div{
+	
+	padding:5px 0px 5px 0px;
+}
+.c_sale{
+	padding:10px 10px;
+	font-size:17px;
+}
+
+.manager span {
+	display: inline-block;
+	width: 120px;
+}
+.manager select{
+   width:195px;
+   border: 1px solid gray;
+   border-radius:3px;
+   
+   padding:2px 5px;
+}

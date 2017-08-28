@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商品管理</title>
+<link rel="stylesheet"
+	href="plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/manager.css">
+<style type="text/css">
+.manager span {
+	display: inline-block;
+	width: 120px;
+}
+.manager select {
+	
+	width: 190px;
+	border: 1px solid gray;
+   
+    border-radius: 3px;
+}
+
+#op_select_c button {
+	float: right;
+	padding: 3px 15px;
+	margin-top: 5px;
+}
+</style>
+</head>
+<body>
+	<div id="header-2017"
+		style="position:fixed;border-bottom:1px solid gray">
+		<div style=" width:85%; margin:0 auto;">
+			<div class="header-lf">
+				<a href="index.html" title="主页"><img src="img/logo.png"></a>
+			</div>
+			<div class="header-md" style="margin-left:30px;">
+				<div style="height:100%;padding-left:10px;display:inline-block;">
+					<h2>电子商务</h2>
+				</div>
+				<div style="height:100%;padding-left:30px;display:inline-block;">
+					<h4>小类别标签管理</h4>
+				</div>
+			</div>
+			<div class="header-md" style="float: right">
+				<ul id="login_span">
+					<li><a href="login.html">登录</a></li>
+					<li><a href="##" style="margin-left: 0px;pading-left:0px;">
+							注册</a></li>
+				</ul>
+				<ul id="user_span" style="display:none;">
+					<li><a href="mgrInfo.html" id="user_name">玛丽亚</a></li>
+					<li><a href="logout.do"
+						style="margin-left: 0px;pading-left:0px;" id="logout_bt"> 退出</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div style="min-height:90vh;width:75%;margin:0 auto;padding-top:80px;">
+		<div id="op_select_c" class="modify_op">
+			<div class="fouse_bt">首页</div>
+			<div>添加</div>
+			<div>修改</div>
+			<div>删除</div>
+			<button id="jmp_to_btype">大类别标签</button>
+		</div>
+
+		<div id="bs_home_page" style="">
+			<div id="table_value" class="content_table">
+				<table class="table">
+					<thead>
+						<tr>
+							<td>小类别id</td>
+							<td>大类别名</td>
+							<td>小类别名</td>
+						</tr>
+					</thead>
+					<tbody id="body_frame">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="bs_add" class="content"
+			style="display:none;margin-top:80px;padding-top:80px;width:500px;">
+
+			<div class="manager">
+				<span> 昵称：</span><input id="st_add_name" type="text"
+					placeholder="输入小类型标签名">
+			</div>
+			<div class="manager">
+				<span>大类别标签：</span><select id="add_big_tag">
+					<option value="">&nbsp;&nbsp;</option>
+				</select>
+			</div>
+			<div class="error-mess" style="display:none;" id="add_error_span">
+				<span id="add_error-message"></span>
+			</div>
+			<div class="put_bt">
+				<input id="add_bt" type="button" value="添加">
+			</div>
+		</div>
+
+		<div id="bs_mod" style="display:none">
+			<div id="mod_table_value" class="content_table">
+				<table class="table">
+					<thead>
+						<tr>
+							<td>小类别id</td>
+							<td>大类别名</td>
+							<td>小类别名</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody id="mod_body_frame">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="m_mod_box" style="display:none">
+			<div class="content" style="padding-top:60px;width:450px;">
+
+				<div class="manager">
+					<span> id号：</span><input id="st_mod_id" type="text"
+						readonly="readonly">
+				</div>
+				<div class="manager">
+					<span> 昵称：</span><input id="st_mod_name" type="text"
+						placeholder="输入小类型标签">
+				</div>
+				<div class="manager">
+				<span>大类别标签：</span><select id="mod_big_tag">
+					<option value="">&nbsp;&nbsp;</option>
+				</select>
+			</div>
+				<div class="error-mess" style="display:none;" id="mod_error_span">
+					<span id="mod_error-message"></span>
+				</div>
+				<div class="put_bt">
+					<input id="mod_sure_bt" type="button" value="修改"
+						style="margin-left:20px;"> <input id="mod_cancel_bt"
+						type="button" value="取消">
+				</div>
+			</div>
+		</div>
+
+		<div id="bs_del" style="display:none">
+			<div class="content_table">
+				<table class="table">
+					<thead>
+						<tr>
+							<td>小类别id</td>
+							<td>大类别名</td>
+							<td>小类别名</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody id="del_body_frame">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="m_del_box" style="display:none">
+			<div class="content">
+
+				<div style="font-size:18px;padding-bottom:20px;">
+					<span>是否删除id为<span id="st_delete_id_show">1</span>大类型标签
+					</span>
+				</div>
+				<div class="error-mess" style="display:none;" id="del_error_span">
+					<span id="del_error-message"></span>
+				</div>
+				<div class="put_bt">
+					<input id="m_delete_bt" type="button" value="删除"
+						style="margin-left:50px;margin-right:20px;float: none;"> <input
+						id="del_cancel_bt" type="button" value="取消" style="float: none;">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer-2017">
+		<div class="footer-box">
+			<h5>地址：广东省广州市天河区华南农业大学华山区18栋3楼</h5>
+		</div>
+
+	</div>
+
+	<script src="plugins/jquery-3.3.1/jquery-3.1.1.min.js"></script>
+	<script src="plugins/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/stype.js"></script>
+	<script type="text/javascript">
+		var ids = [ 'bs_home_page', 'bs_add', 'bs_mod', 'bs_del' ];
+		var title_operator = $('#op_select_c>div');
+	</script>
+	<script src="js/operator.js"></script>
+
+</body>
+</html>
